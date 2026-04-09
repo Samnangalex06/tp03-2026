@@ -4,15 +4,15 @@ pipeline {
     stages {
         stage('Build Docker') {
             steps {
-                sh 'docker build -t tp03-laravel .'
+                bat 'docker build -t tp03-laravel .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh '''
-                docker stop tp03-container || true
-                docker rm tp03-container || true
+                bat '''
+                docker stop tp03-container || echo no container
+                docker rm tp03-container || echo no container
                 docker run -d -p 8000:8000 --name tp03-container tp03-laravel
                 '''
             }
