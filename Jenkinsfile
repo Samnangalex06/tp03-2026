@@ -23,8 +23,20 @@ pipeline {
     }
 
     post {
+        success {
+            bat '''
+            curl -X POST https://api.telegram.org/bot8710184853:AAG6IEWeNx3-l1Ryviq4-2_PHjrWjD8N5us/sendMessage ^
+            -d chat_id=1243164004 ^
+            -d text="Jenkins Build Success"
+            '''
+        }
+
         failure {
-            echo 'Build Failed!'
+            bat '''
+            curl -X POST https://api.telegram.org/bot8710184853:AAG6IEWeNx3-l1Ryviq4-2_PHjrWjD8N5us/sendMessage ^
+            -d chat_id=1243164004 ^
+            -d text="Jenkins Build Failed"
+            '''
         }
     }
 }

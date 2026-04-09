@@ -1,7 +1,6 @@
 FROM php:8.4-cli
 
 WORKDIR /app
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git curl unzip libzip-dev libonig-dev libpng-dev \
@@ -10,10 +9,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Copy project
 COPY . .
-
 # Create sqlite file
 RUN mkdir -p database \
     && touch database/database.sqlite \
